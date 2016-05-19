@@ -1,0 +1,38 @@
+VHD: Viscous HydroDynamics
+by: Jonathan C. McKinney & Charles F. Gammie
+
+Description:
+
+This code evolves the equations of hydrodynamics including a viscous stress parameterized by alpha to simulate disk accretion around a black hole.
+
+Code:
+
+global.h : contains most global parameters to control the simulation, function declarations, etc.
+--: To change the problem size, datatype, viscous tensor components, terms to use in pressure/gravity function, turn on/off diagnostics, or add new function declarations
+
+defs.h : contains definitions of variables
+timestep1.h : timestep limiter calculations
+timestep2.h : like (1) above, but no courant factor, for analysis of time scales
+===
+main.c: main loop, runtime diagnostics
+init.c: initializes the code
+--: analoutput chooses type of problem used in analsol.c, can turn on/off various physics terms, modify viscosity initialization, etc.
+analsol.c: initializes the physics
+--: analsol.c contains the injection and torus IC, and all specific parameters to this problem setup
+step.c: physics code
+sweep.c: advection code
+timestep.c: timestep code
+bound.c: boundary value code
+diag.c: diagnostics
+numerics.c: numerical details, non-physics
+ranc.c: numerical recipies randomizer
+utilfun.c: utility functions
+
+===
+Example compile and run:
+
+make
+cd bin
+./twod
+
+===
